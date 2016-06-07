@@ -128,7 +128,10 @@ function IsInjected($str)
 ?>
 	<title>Strawberry Mitten</title>
 	
-	<meta name="Developers" content="">
+	<meta name="Developers" content="Alejandro Navia, Junko Fujioka, Steven Desa, Jayne Ramos, Oscar Campos, Tommy Ocampo, Anthony Coe">
+    <meta name="project" content="Group #2 Final Project">
+    <meta name="date" content="June 7, 2016">
+    <meta name="description" content="Create a Website with a Shopping Cart that connects to a Database.">
 	
 <!--  Internal and external links to css properties -->
 	
@@ -139,6 +142,8 @@ function IsInjected($str)
 	<link rel="stylesheet" type="text/js" href="js/bootstrap.js">
 	<link rel="stylesheet" type="text/js" href="js/jquery.js">
 	<link rel="stylesheet" type="text/js" href="js/gen_validatorv31.js">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
 
 
 </head>
