@@ -36,6 +36,55 @@ function update_password($oldpass, $newpass) {
   }
 }
 
+function create_user($email, $password) {
+  // Create user account.
+  
+  // Check that we have valid input.
+  if(!valid_email($email) || $password == "" || strlen($password) < 8) {
+	  return false;
+  }
+  if(user_logged_in()) {
+	  // Check if user is logged in.
+	  return false;
+  }
+  
+  // Check email is unique.
+  $db = connect_db();
+  $email = addslashes($email);
+  $q = "SELECT cust_id FROM Customers WHERE cust_email='".$email."'";
+  $res = @$db->query($q);
+  $num_rows = @$res->num_rows;
+  if($num_rows > 0) {
+	  $db->close();
+	  return false;
+  }
+  
+  // Get next ID.
+  $q = "SELECT MAX(cust_id) AS next_id FROM Customers";
+  $res = @$db->query($q);
+  if(!$res) {
+	  $db->close();
+	  return false;
+  }
+  $next_id = @$res->fetch_assoc();
+  $next_id = $next_id['next_id']+1;
+  
+  // Insert new customer.
+  $password = hash("sha256", $password);
+  $q = "INSERT INTO Customers VALUES (?, '', '', '', '', '', ?, ?, 0)";
+  $update = $db->prepare($q);
+  $update->bind_param("sss", $next_id, $email, $password);
+  if($update->execute()) {
+	  $db->close();
+	  return true;
+  }
+  else {
+	  $db->close();
+	  return false;
+  }
+}
+  
+
 function update_information($name, $addr, $city, $state, $zip, $email) {
   // Update user's account information.
   

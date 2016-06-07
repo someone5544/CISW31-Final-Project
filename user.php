@@ -66,7 +66,14 @@ $cust_info = load_user_info();
       </form>
     </table>
     <br><br>
-    <p style="text-align: center"><a href="orders.php" class="btn btn-primary btn-md">My Orders</a>&nbsp;<a href="logout.php" class="btn btn-primary btn-md">Log Out</a></p>
+    <p style="text-align: center">
+    <a href="orders.php" class="btn btn-primary btn-md">My Orders</a>&nbsp;
+<?php
+if(user_admin_level()) {
+	echo "<a href=\"admin.php\" class=\"btn btn-primary btn-md\">Administration</a>&nbsp;\n";
+}
+?>
+    <a href="logout.php" class="btn btn-primary btn-md">Log Out</a></p>
   </div>
 <?php
   require('footer.php');
