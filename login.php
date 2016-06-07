@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
   require('inc/session.php');
   require('inc/account.php');
   if(user_logged_in()) {
