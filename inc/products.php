@@ -2,7 +2,8 @@
 include_once("inc/db.php");
 
 function get_products() {
-  // Query database for available products.
+  // Query database for all available products.
+  
   $db = connect_db();
   $q = "SELECT * FROM Products";
   $res = @$db->query($q);
@@ -17,6 +18,7 @@ function get_products() {
 
 function check_product($id) {
   // Check if product is valid.
+  
   $id = addslashes($id);
   $db = connect_db();
   $q = "SELECT prod_name FROM Products WHERE plu_id='".$id."'";
@@ -32,6 +34,7 @@ function check_product($id) {
 
 function get_product_info($id) {
   // Return product information for given ID.
+  
   if(!check_product($id))
     return false;
   $db = connect_db();
@@ -48,6 +51,7 @@ function get_product_info($id) {
 
 function display_products($products) {
   // Output HTML to display products.
+  
   $item = 0;
   foreach($products as $product) {
     if($item == 0) {

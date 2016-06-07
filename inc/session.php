@@ -5,6 +5,7 @@ include_once("inc/validation.php");
 
 if(!isset($_SESSION['cart'])) {
   // Set cart session data if it is not set.
+  
   $_SESSION['cart'] = array();
   $_SESSION['cart_items'] = 0;
   $_SESSION['cart_subtotal'] = 0;
@@ -12,12 +13,14 @@ if(!isset($_SESSION['cart'])) {
 
 if(!isset($_SESSION['user'])) {
   // Set user ID session data if it is not set.
+  
   $_SESSION['user'] = NULL;
   $_SESSION['user_admin'] = false;
 }
 
 function user_logged_in() {
   // Check if user is logged in.
+  
   if(!isset($_SESSION['user']) || is_null($_SESSION['user']))
     return false;
   else
@@ -26,6 +29,7 @@ function user_logged_in() {
 
 function log_in_user($email, $pass) {
   // Attempt to log in user.
+  
   if(!valid_email($email) || $pass == "") {
     return false;
   }
@@ -57,6 +61,7 @@ function log_in_user($email, $pass) {
 
 function load_user_info() {
 	// Load logged in user's information.
+	
 	if(!user_logged_in()) {
 		return false;
 	}
@@ -74,6 +79,7 @@ function load_user_info() {
 
 function user_admin_level() {
   // Check if user is an administrator.
+  
   if(!isset($_SESSION['user_admin']) || is_null($_SESSION['user_admin']) || !$_SESSION['user_admin'])
     return false;
   else
@@ -82,6 +88,7 @@ function user_admin_level() {
 
 function reset_session() {
   // Reset the cart.
+  
   unset($_SESSION['cart'], $_SESSION['cart_items'], $_SESSION['cart_subtotal']);
   $_SESSION['cart'] = array();
   $_SESSION['cart_items'] = 0;
@@ -90,6 +97,7 @@ function reset_session() {
 
 function end_session() {
   // Destroy the current session.
+  
   unset($_SESSION);
   session_destroy();
 }

@@ -5,6 +5,7 @@ include_once("inc/products.php");
 
 function process_card($card_num, $card_mo, $card_yr, $card_verify) {
 	// Process the credit card.
+	
 	if($card_num == "" || $card_mo == "" || $card_yr == "" || $card_verify == "") {
 		// Check that values were provided.
 		return false;
@@ -38,9 +39,13 @@ function process_card($card_num, $card_mo, $card_yr, $card_verify) {
 
 function store_order($cart) {
 	// Store cart to database.
+	
 	if(!user_logged_in()) {
+		// Check if user is logged in.
 		return false;
 	}
+	
+	// Get new order number.
 	$db = connect_db();
 	$q = "SELECT MAX(order_num) AS max_order FROM Orders";
 	$res = @$db->query($q);
@@ -52,7 +57,8 @@ function store_order($cart) {
 	$next_order = $next_order['max_order']+1;
 	$q = "INSERT INTO Orders VALUES ('".$next_order."', NOW(), '".$_SESSION['user']."')";
 	@$db->query($q);
-	// Go through items in cart.
+	
+	// Go through items in cart and store them.
 	$i = 1;
 	foreach($cart as $item_id => $qty) {
 		$item_info = get_product_info($item_id);

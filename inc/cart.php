@@ -32,6 +32,7 @@ function display_cart($cart) {
     foreach($cart as $prod_id => $qty) {
 	  $prod_info = get_product_info($prod_id);
 	  $subtot = number_format($prod_info['prod_price'] * $qty, 2);
+	  
 	  echo "<tr>";
 	  echo "<td>".htmlspecialchars($prod_info['prod_name'])."</td>";
 	  echo "<td style=\"text-align: right\"><input type=\"text\" id=\"".$prod_id."\" value=\"".$qty."\" size=\"2\" maxlength=\"2\"></td>";

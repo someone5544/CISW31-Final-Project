@@ -5,6 +5,7 @@ include_once("inc/validation.php");
 
 function update_password($oldpass, $newpass) {
   // Update user's password.
+  
   if(user_logged_in()) {
 	if(strlen($newpass) < 8) {
 		// Password is too short.
@@ -16,7 +17,7 @@ function update_password($oldpass, $newpass) {
     $res = @$res->fetch_assoc();
 
     if($res['cust_password'] == hash("sha256", $oldpass)) {
-      // Passwords match, continue changing the password.
+      // Passwords match, store the new password.
       $q = "UPDATE Customers SET cust_password='".hash("sha256", $newpass)."' WHERE cust_id='".$_SESSION['user']."'";
       $res = @$db->query($q);
       $db->close();
@@ -37,9 +38,12 @@ function update_password($oldpass, $newpass) {
 
 function update_information($name, $addr, $city, $state, $zip, $email) {
   // Update user's account information.
+  
   if(!user_logged_in()) {
+	  // Check if user is logged in.
 	  return false;
   }
+  // Check that we have valid input.
   if($name == "" || $addr == "" || $city == "" || $state == "" || $zip == "" || $email == "") {
     return false;
   }
@@ -47,6 +51,7 @@ function update_information($name, $addr, $city, $state, $zip, $email) {
     return false;
   }
 
+  // Update user's information.
   $db = connect_db();
   $q = "UPDATE Customers SET cust_name=?, cust_address=?, cust_city=?, cust_state=?, cust_zip=?, cust_email=? WHERE cust_id=?";
   $update = $db->prepare($q);
@@ -64,9 +69,12 @@ function update_information($name, $addr, $city, $state, $zip, $email) {
 
 function update_shipping($name, $addr, $city, $state, $zip) {
   // Update user's shipping information.
+  
   if(!user_logged_in()) {
+	  // Check if user is logged in.
 	  return false;
   }
+  // Check that we have valid input.
   if($name == "" || $addr == "" || $city == "" || $state == "" || $zip == "") {
     return false;
   }
@@ -74,6 +82,7 @@ function update_shipping($name, $addr, $city, $state, $zip) {
     return false;
   }
 
+  // Update user's shipping information.
   $db = connect_db();
   $q = "UPDATE Customers SET cust_name=?, cust_address=?, cust_city=?, cust_state=?, cust_zip=? WHERE cust_id=?";
   $update = $db->prepare($q);

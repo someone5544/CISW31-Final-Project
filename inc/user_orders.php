@@ -5,6 +5,7 @@ include_once("inc/products.php");
 
 function get_user_orders() {
   // Get all orders for logged in user.
+  
   if(!user_logged_in()) {
     return false;
   }
@@ -23,6 +24,7 @@ function get_user_orders() {
 
 function get_user_order($orderid) {
   // Get info for a specific order.
+  
   if($orderid == "") {
     return false;
   }
@@ -49,6 +51,7 @@ function get_user_order($orderid) {
 
 function calculate_order_total($order_products) {
   // Calculate total for given order.
+  
   if(empty($order_products)) {
 	  return 0;
   }
@@ -61,6 +64,7 @@ function calculate_order_total($order_products) {
 
 function display_orders($orders) {
   // Output HTML to display user's orders.
+  
   if(empty($orders)) {
     echo "<table align=\"center\"><tr><td style=\"text-align: center\">You have no orders.</td></tr></table>\n";
   }
@@ -83,6 +87,7 @@ function display_orders($orders) {
 
 function display_order($order) {
   // Output HTML to display a single order.
+  
   if(empty($order)) {
     echo "<table align=\"center\"><tr><td style=\"text-align: center\">Invalid order.</td></tr></table>\n";
   }
