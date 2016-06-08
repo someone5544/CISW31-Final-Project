@@ -46,6 +46,9 @@ if($product) {
       </form>
 <?php
 }
+else {
+	echo "<tr><td colspan=\"3\" style=\"text-align: center\"><b>Invalid product.</b></td></tr>\n";
+}
 ?>
     </table>
   </div>
